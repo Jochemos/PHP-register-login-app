@@ -1,18 +1,35 @@
 <?php
 
   require_once 'core/init.php';
-  require_once 'classes/ValidatePassword.php';
+  require_once 'classes/Validation.php';
+  require_once 'classes/User.php';
 
   if(Input::exist()){
 
-    $validate = new Validate();
+    $validation = new Validation();
 
-    echo $validate->check(array(
+    $validation->check(array(
       "username" => $_POST['username'],
       "password" => $_POST['password'],
       "password_again" => $_POST['password_again'],
       "name" => $_POST['name']
     ));
+
+    if($validation->passed() === true){
+
+      try {
+        $user = new User();
+
+        $user->createUser(array(
+          "username" => $_POST['username'],
+          "password" => $_POST['password'],
+          "name" => $_POST['name']
+        ));
+      }catch(Exception $e) {
+        echo "Something went wrong.";
+      }
+
+    }
   }
 
 ?>

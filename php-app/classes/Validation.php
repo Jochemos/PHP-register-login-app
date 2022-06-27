@@ -2,7 +2,7 @@
 
   require_once 'core/init.php';
 
-  class Validate {
+  class Validation {
     private $_passed = false;
     public $_errors = array();
     private $_db = null;
@@ -22,11 +22,14 @@
       $this->checkLength();
       $this->checkPassword();
 
+    }
+
+    public function passed() {
 
       if(!empty($this->_errors)){
         echo implode("", $this->_errors);
       }else{
-        echo $this->_passed;
+        return true;
       }
 
     }
