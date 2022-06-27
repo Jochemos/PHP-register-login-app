@@ -1,5 +1,7 @@
 <?php
 
+  require_once 'core/init.php';
+
   class DB {
 
     private static $_instance = null;
@@ -9,7 +11,6 @@
     private function __construct() {
       try {
         $this->_pdo = new PDO('mysql:host=' . Config::get('mysql/host') . ';dbname=' . Config::get('mysql/db'), Config::get('mysql/username'), Config::get('mysql/password'));
-        echo "Connected !";
       } catch(PDOException $e) {
           die($e->getMessage());
       }
@@ -27,14 +28,14 @@
 
       if($detail != null){
         $detail = implode(" ", $detail);
-        $sql = $sql . " WHERE {$detail} ";
+        $sql = $sql . " WHERE " . $detail;
       }
 
       $giveOrder = $this->_pdo->prepare($sql);
       $giveOrder->execute();
 
       while($_result = $giveOrder->fetchAll()){
-        return var_dump($_result);
+        return $this;
       }
     }
 
