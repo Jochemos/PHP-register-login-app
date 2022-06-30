@@ -1,12 +1,11 @@
 <?php
 
-  require_once 'core/init.php';
-  require_once 'classes/Hash.php';
+  require_once 'classes/DB.php';
+  require_once 'classes/Validation.php';
 
   class User {
 
     private $_data = null;
-    private $_hash_password = null;
     private $_db = null;
 
     public function __construct() {
@@ -17,14 +16,34 @@
 
       $this->_data = $data;
 
-      $hash = new Hash($data["password"]);
-      $this->_hash_password = $hash->getHashPassword();
 
       $this->_db->addData("users", array(
         "username" => $this->_data["username"],
-        "password" => $this->_hash_password,
+        "password" => password_hash($data["password"], PASSWORD_DEFAULT),
         "name" => $this->_data["name"]
       ));
+
+    }
+
+    public function findUser($data) {
+
+      $checkUsername = $this->_db->getData("username", "users", array("username", "=", "'{$data["username"]}'"));
+
+      if($checkUsername) {
+
+        $valid_pwd = new Validation();
+
+        $valid_pwd->checkLogin($data);
+
+        if($valid_pwd->passed() === true){
+          echo "Welcome";
+        }
+
+      }else{
+
+        echo "User not exist !";
+
+      }
 
     }
 

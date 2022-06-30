@@ -1,14 +1,16 @@
 <?php
 
-  require_once 'core/init.php';
   require_once 'classes/Validation.php';
   require_once 'classes/User.php';
+  require_once 'classes/Input.php';
+  require_once 'classes/DB.php';
+  require_once 'classes/Redirect.php';
 
   if(Input::exist()){
 
     $validation = new Validation();
 
-    $validation->check(array(
+    $validation->checkRegistration(array(
       "username" => $_POST['username'],
       "password" => $_POST['password'],
       "password_again" => $_POST['password_again'],
@@ -18,6 +20,7 @@
     if($validation->passed() === true){
 
       try {
+
         $user = new User();
 
         $user->createUser(array(
@@ -25,6 +28,11 @@
           "password" => $_POST['password'],
           "name" => $_POST['name']
         ));
+
+        if($user){
+          Redirect::go("login");
+        }
+
       }catch(Exception $e) {
         echo "Something went wrong.";
       }

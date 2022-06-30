@@ -1,6 +1,6 @@
 <?php
 
-  require_once 'core/init.php';
+  require_once 'classes/DB.php';
 
   class Validation {
     private $_passed = false;
@@ -12,7 +12,7 @@
       $this->_db = DB::getInstance();
     }
 
-    public function check($data) {
+    public function checkRegistration($data) {
 
       $this->getDBInstance();
       $this->_data = $data;
@@ -21,6 +21,16 @@
       $this->checkAvailable();
       $this->checkLength();
       $this->checkPassword();
+
+    }
+
+    public function checkLogin($data) {
+
+      $this->getDBInstance();
+      $this->_data = $data;
+
+      $this->checkBtwPwd();
+
 
     }
 
@@ -66,7 +76,7 @@
       $dataLength = array(
         "username" => [4, 15],
         "password" => [5, 30],
-        "password_again" => [5, 20],
+        "password_again" => [5, 30],
         "name" => [2, 30]
       );
 
@@ -113,6 +123,27 @@
         array_push($this->_errors, "Password must be equal <br>");
       }else{
         $this->_passed = true;
+      }
+
+    }
+
+    private function checkBtwPwd() {
+
+      $data = $this->_data;
+
+      $entered_pwd = $data["password"];
+
+      $user_data = $this->_db->getData("password", "users", array("username", "=", "'{$data["username"]}'"));
+
+      $hashed_password = $user_data[0]["password"];
+
+      $verify = password_verify($entered_pwd, $hashed_password);
+
+      if($verify === true){
+        $this->_passed = true;
+      }else{
+        $error = "Invalid password";
+        array_push($this->_errors, $error);
       }
 
     }

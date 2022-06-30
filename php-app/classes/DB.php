@@ -1,6 +1,7 @@
 <?php
 
   require_once 'core/init.php';
+  require_once 'classes/Config.php';
 
   class DB {
 
@@ -34,9 +35,8 @@
       $giveOrder = $this->_pdo->prepare($sql);
       $giveOrder->execute();
 
-      while($_result = $giveOrder->fetchAll()){
-        return $this;
-      }
+      return $giveOrder->fetchAll();
+
     }
 
     public function deleteData($id) {
