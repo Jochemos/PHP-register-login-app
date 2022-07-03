@@ -12,7 +12,7 @@
       $this->_db = DB::getInstance();
     }
 
-    public function createUser($data) {
+    public function createUser(array $data): void {
 
       $this->_data = $data;
 
@@ -25,7 +25,7 @@
 
     }
 
-    public function findUser($data) {
+    public function findUser(array $data) {
 
       $checkUsername = $this->_db->getData("username", "users", array("username", "=", "'{$data["username"]}'"));
 
@@ -36,7 +36,7 @@
         $valid_pwd->checkLogin($data);
 
         if($valid_pwd->passed() === true){
-          echo "Welcome";
+          return true;
         }
 
       }else{

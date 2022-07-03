@@ -2,7 +2,7 @@
 
   class Redirect {
 
-    public static function go($location) {
+    public static function go(string $location): void {
 
       try {
 
@@ -10,7 +10,7 @@
 
       }catch(Exception $e) {
 
-        header("Location: http://localhost:8000/index.php");
+        header("Location: http://localhost:8000/includes/errors/404.php");
 
       }
 

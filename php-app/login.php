@@ -2,21 +2,24 @@
 
   require_once 'classes/User.php';
   require_once 'classes/Input.php';
-  //require_once 'classes/DB.php';
-  //require_once 'classes/Redirect.php';
+  require_once 'classes/Redirect.php';
 
   if(Input::exist()) {
 
     $users = new User();
 
-    $users->findUser(array(
+    $user_input = array(
       "username" => $_POST["username"],
       "password" => $_POST["password"]
-    ));
+    );
 
+    $findUser = $users->findUser($user_input);
+
+    if($findUser === true){
+      Redirect::go("blog");
+    }
 
   }
-
 
 ?>
 

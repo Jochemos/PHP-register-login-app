@@ -2,7 +2,7 @@
 
   class Config {
 
-    public static function get($path = null){
+    public static function get(string $path = null) {
       if($path) {
 
         $path = explode('/', $path);

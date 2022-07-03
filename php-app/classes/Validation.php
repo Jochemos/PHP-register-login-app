@@ -14,23 +14,22 @@
 
     public function checkRegistration($data) {
 
-      $this->getDBInstance();
+      self::getDBInstance();
       $this->_data = $data;
 
-      $this->checkRequire();
-      $this->checkAvailable();
-      $this->checkLength();
-      $this->checkPassword();
+      self::checkRequire();
+      self::checkAvailable();
+      self::checkLength();
+      self::checkPassword();
 
     }
 
     public function checkLogin($data) {
 
-      $this->getDBInstance();
+      self::getDBInstance();
       $this->_data = $data;
 
-      $this->checkBtwPwd();
-
+      self::checkBtwPwd();
 
     }
 

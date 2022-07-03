@@ -1,7 +1,7 @@
 <?php
 
   class Input {
-    public static function exist($type = 'post'){
+    public static function exist(): bool {
 
       return (!empty($_POST)) ? true : false;
 

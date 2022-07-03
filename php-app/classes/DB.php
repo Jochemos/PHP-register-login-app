@@ -24,7 +24,7 @@
       return self::$_instance;
     }
 
-    public function getData($column, $table, $detail = null) {
+    public function getData(string $column, string $table, array $detail = null): array {
       $sql = "SELECT {$column} FROM {$table}";
 
       if($detail != null){
@@ -39,7 +39,7 @@
 
     }
 
-    public function deleteData($id) {
+    public function deleteData(string $id): array {
 
       $sql = "DELETE FROM posts WHERE id = ?";
 
@@ -47,7 +47,7 @@
       $giveOrder->execute([$id]);
     }
 
-    public function addData($table, $data){
+    public function addData(string $table, array $data): bool{
 
       $indexKeys = implode(', ', array_keys($data));
 
@@ -77,16 +77,16 @@
 
         $giveOrder->execute();
 
-        return "New data added !";
+        return true;
 
       }else{
 
-        return "Add data failed !";
+        return false;
 
       }
     }
 
-    public function updateData($table, $newData, $id) {
+    public function updateData(string $table, array $newData, string $id): bool {
 
       $dataKeys = array_keys($newData);
 
@@ -113,11 +113,11 @@
 
         $giveOrder->execute();
 
-        return "Update data successfully !";
+        return true;
 
       }else{
 
-        return "Add data failed !";
+        return false;
 
       }
 
