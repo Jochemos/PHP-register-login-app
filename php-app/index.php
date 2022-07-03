@@ -1,5 +1,8 @@
 <?php
 
+  require_once 'classes/Cookies.php';
+
+  Cookie::delete("user");
 
 ?>
 

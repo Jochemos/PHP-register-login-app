@@ -3,8 +3,14 @@
   require_once 'classes/User.php';
   require_once 'classes/Input.php';
   require_once 'classes/Redirect.php';
+  require_once 'classes/Cookies.php';
 
+/*  if(isset($_COOKIE['user'])){
+    Redirect::go("blog");
+  }
+*/
   if(Input::exist()) {
+
 
     $users = new User();
 
@@ -16,6 +22,7 @@
     $findUser = $users->findUser($user_input);
 
     if($findUser === true){
+      Cookie::new("user", 3600);
       Redirect::go("blog");
     }
 
