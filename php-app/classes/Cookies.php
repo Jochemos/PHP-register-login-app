@@ -2,8 +2,9 @@
 
   class Cookie {
 
-    public static function new(string $cookie_name, int $expire): void {
-      $unique = uniqid('%s\r\n', true);
+    public static function new(string $cookie_name, string $identify, int $expire): void {
+      $prefix = '%' . $identify . '%s\r\n';
+      $unique = uniqid($prefix, true);
       setcookie($cookie_name, $unique, time() + $expire);
     }
 

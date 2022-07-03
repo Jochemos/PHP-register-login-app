@@ -36,7 +36,11 @@
         $valid_pwd->checkLogin($data);
 
         if($valid_pwd->passed() === true){
-          return true;
+
+          $userData = $this->_db->getData("id", "users", array("username", "=", "'{$data["username"]}'"));
+          
+          return $userData[0][0];
+
         }
 
       }else{
