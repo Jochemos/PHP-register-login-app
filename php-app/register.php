@@ -40,6 +40,10 @@
     }
   }
 
+   if(isset($_COOKIE['user'])) {
+     Redirect::go('blog');
+   }
+
 ?>
 
 <form action="" method="post">

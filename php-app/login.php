@@ -25,6 +25,10 @@
 
   }
 
+  if(isset($_COOKIE['user'])) {
+    Redirect::go('blog');
+  }
+
 ?>
 
 

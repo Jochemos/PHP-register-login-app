@@ -2,7 +2,7 @@
 
   require_once 'classes/Cookies.php';
 
-  Cookie::delete("user");
+  Cookie::delete('user');
 
 ?>
 
