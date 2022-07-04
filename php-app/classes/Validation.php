@@ -162,18 +162,22 @@
       foreach($data as $key => $value) {
 
         if(strlen($value) === 0){
-          echo "Title and body of post is required !";
+          $error = "{$key} is required ! <br>";
+          array_push($this->_errors, $error);
         }
 
         if($key === "title" and strlen($value) > 30){
-          echo "Title must be less than 30 !";
+          $error = "{$key} must be less than 30 ! <br>";
+          array_push($this->_errors, $error);
         }
 
         if($key === "body" and strlen($value) > 200){
-          echo "Body of post must be less than 200 !";
+          $error = "{$key} of post must be less than 200 ! <br>";
+          array_push($this->_errors, $error);
         }
 
       }
+
     }
 
 

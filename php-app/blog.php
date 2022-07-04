@@ -3,30 +3,61 @@
   require_once 'classes/DB.php';
   require_once 'classes/Input.php';
   require_once 'classes/Validation.php';
+  require_once 'classes/Blog.php';
 
   if(isset($_COOKIE['user'])){
 
-    $user = new Cookie();
-    $data = DB::getInstance()->getData("*", "blog", array("user_id", "=", $user->getId()));
+    $blogRepository = new Blog();
+    $data = $blogRepository->getPosts();
 ?>
 
-<a href="http://localhost:8000/index.php" onclick="logout()">Logout</a>
+<a href="http://localhost:8000/index.php">Logout</a>
 <h3> This is your blog ! </h3>
 
 <?php
 
+  $increment = 1;
+
   foreach($data as $val){
+
+    echo "Post nr. {$increment}";
+    echo '<p><a href="http://localhost:8000/blog-delete.php">Delete</a>
+             <a href="http://localhost:8000/blog-update.php">Update</a>
+    </p>';
+
     echo "<h4>" . $val['title'] . "</h4>" . " <h5>" . $val['body'] . "</h5><h6>" . $val['date_created'] . "</h6><br>";
+
+    $increment++;
+
   }
 
   if(Input::exist()) {
 
     $validation = new Validation();
 
-    $validation->checkPost(array(
+    $inputPost = array(
       "title" => $_POST['title'],
       "body" => $_POST['body']
-    ));
+    );
+
+    $validation->checkPost($inputPost);
+
+    if($validation->passed()){
+
+
+      try {
+
+        $add = $blogRepository->addPost($inputPost);
+
+        ?><script> window.location.replace("http://localhost:8000/blog.php") </script>;<?php
+
+      }catch(Exception $e) {
+
+        echo "Something went wrong. Try again...";
+
+      }
+
+    }
   }
 ?>
   <form action="" method="post">
