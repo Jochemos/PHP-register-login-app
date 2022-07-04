@@ -1,13 +1,57 @@
 <?php
   require_once 'classes/Cookies.php';
-
+  require_once 'classes/DB.php';
+  require_once 'classes/Input.php';
+  require_once 'classes/Validation.php';
 
   if(isset($_COOKIE['user'])){
+
+    $user = new Cookie();
+    $data = DB::getInstance()->getData("*", "blog", array("user_id", "=", $user->getId()));
 ?>
 
 <a href="http://localhost:8000/index.php" onclick="logout()">Logout</a>
 <h3> This is your blog ! </h3>
+
 <?php
+
+  foreach($data as $val){
+    echo "<h4>" . $val['title'] . "</h4>" . " <h5>" . $val['body'] . "</h5><h6>" . $val['date_created'] . "</h6><br>";
+  }
+
+  if(Input::exist()) {
+
+    $validation = new Validation();
+
+    $validation->checkPost(array(
+      "title" => $_POST['title'],
+      "body" => $_POST['body']
+    ));
+  }
+?>
+  <form action="" method="post">
+
+    <h3>
+    <label for="post">add new post:</label>
+    </h3>
+
+    <label for="title">Title</label>
+    <br>
+    <input type="text" name="title" id="title">
+    <br>
+    <br>
+    <label for="post">What's new?</label>
+    <br>
+    <textarea name="body">Enter your text</textarea>
+    <br>
+    <br>
+    <input type="submit" value="add">
+
+  </form>
+
+<?php
+
+
 
 }else{
 

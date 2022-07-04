@@ -14,23 +14,31 @@
 
     public function checkRegistration($data) {
 
-      self::getDBInstance();
+      $this->getDBInstance();
       $this->_data = $data;
 
-      self::checkRequire();
-      self::checkAvailable();
-      self::checkLength();
-      self::checkPassword();
+      $this->checkRequire();
+      $this->checkAvailable();
+      $this->checkLength();
+      $this->checkPassword();
 
     }
 
     public function checkLogin($data) {
 
-      self::getDBInstance();
+      $this->getDBInstance();
       $this->_data = $data;
 
-      self::checkBtwPwd();
+      $this->checkBtwPwd();
 
+    }
+
+    public function checkPost($data) {
+
+      $this->getDBInstance();
+      $this->_data = $data;
+
+      $this->checkPostData();
     }
 
     public function passed() {
@@ -145,6 +153,27 @@
         array_push($this->_errors, $error);
       }
 
+    }
+
+    private function checkPostData() {
+
+      $data = $this->_data;
+
+      foreach($data as $key => $value) {
+
+        if(strlen($value) === 0){
+          echo "Title and body of post is required !";
+        }
+
+        if($key === "title" and strlen($value) > 30){
+          echo "Title must be less than 30 !";
+        }
+
+        if($key === "body" and strlen($value) > 200){
+          echo "Body of post must be less than 200 !";
+        }
+
+      }
     }
 
 

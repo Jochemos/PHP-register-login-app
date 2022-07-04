@@ -2,7 +2,7 @@
 
   class Cookie {
 
-    public $userId = null;
+    public $_userId = null;
 
     public static function new(string $cookie_name, string $identify, int $expire): void {
       $prefix = '%' . $identify . '%s\r\n';
@@ -16,12 +16,12 @@
 
     private function tearOutId(): void {
       $extractCookie =  explode('%', $_COOKIE['user']);
-      $this->userId = $extractCookie[1];
+      $this->_userId = $extractCookie[1];
     }
 
     public function getId(): string {
       $this->tearOutId();
-      return $this->userId;
+      return $this->_userId;
     }
 
   }
