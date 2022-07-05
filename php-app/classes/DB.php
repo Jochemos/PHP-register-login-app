@@ -39,9 +39,9 @@
 
     }
 
-    public function deleteData(string $id): array {
+    public function deleteData(string $table, string $id): void {
 
-      $sql = "DELETE FROM posts WHERE id = ?";
+      $sql = "DELETE FROM " . $table . " WHERE id = ?";
 
       $giveOrder = $this->_pdo->prepare($sql);
       $giveOrder->execute([$id]);

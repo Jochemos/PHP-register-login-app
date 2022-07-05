@@ -4,7 +4,7 @@
 
   class Validation {
     private $_passed = false;
-    public $_errors = array();
+    private $_errors = array();
     private $_db = null;
     private $_data = null;
 
@@ -12,7 +12,7 @@
       $this->_db = DB::getInstance();
     }
 
-    public function checkRegistration($data) {
+    public function checkRegistration($data): void {
 
       $this->getDBInstance();
       $this->_data = $data;
@@ -24,7 +24,7 @@
 
     }
 
-    public function checkLogin($data) {
+    public function checkLogin($data): void {
 
       $this->getDBInstance();
       $this->_data = $data;
@@ -33,7 +33,7 @@
 
     }
 
-    public function checkPost($data) {
+    public function checkPost($data): void {
 
       $this->getDBInstance();
       $this->_data = $data;
@@ -51,7 +51,7 @@
 
     }
 
-    private function checkRequire() {
+    private function checkRequire(): void {
 
       $data = $this->_data;
 
@@ -72,7 +72,7 @@
       }
     }
 
-    private function checkLength() {
+    private function checkLength(): void {
 
       $data = $this->_data;
 
@@ -107,7 +107,7 @@
 
     }
 
-    private function checkAvailable() {
+    private function checkAvailable(): void {
 
       $data = $this->_data;
 
@@ -121,7 +121,7 @@
       }
     }
 
-    private function checkPassword() {
+    private function checkPassword(): void {
 
       $data = $this->_data;
 
@@ -134,7 +134,7 @@
 
     }
 
-    private function checkBtwPwd() {
+    private function checkBtwPwd(): void {
 
       $data = $this->_data;
 
@@ -155,7 +155,7 @@
 
     }
 
-    private function checkPostData() {
+    private function checkPostData(): void {
 
       $data = $this->_data;
 

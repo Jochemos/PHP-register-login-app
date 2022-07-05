@@ -9,57 +9,42 @@
 
     $blogRepository = new Blog();
     $data = $blogRepository->getPosts();
-?>
-
-<a href="http://localhost:8000/index.php">Logout</a>
-<h3> This is your blog ! </h3>
-
-<?php
-
-  $increment = 1;
-
-  foreach($data as $val){
-
-    echo "Post nr. {$increment}";
-    echo '<p><a href="http://localhost:8000/blog-delete.php">Delete</a>
-             <a href="http://localhost:8000/blog-update.php">Update</a>
-    </p>';
-
-    echo "<h4>" . $val['title'] . "</h4>" . " <h5>" . $val['body'] . "</h5><h6>" . $val['date_created'] . "</h6><br>";
-
-    $increment++;
-
-  }
-
-  if(Input::exist()) {
-
-    $validation = new Validation();
-
-    $inputPost = array(
-      "title" => $_POST['title'],
-      "body" => $_POST['body']
-    );
-
-    $validation->checkPost($inputPost);
-
-    if($validation->passed()){
 
 
-      try {
+    if(Input::exist()) {
 
-        $add = $blogRepository->addPost($inputPost);
+      $validation = new Validation();
 
-        ?><script> window.location.replace("http://localhost:8000/blog.php") </script>;<?php
+      $inputPost = array(
+        "title" => $_POST['title'],
+        "body" => $_POST['body']
+      );
 
-      }catch(Exception $e) {
+      $validation->checkPost($inputPost);
 
-        echo "Something went wrong. Try again...";
+      if($validation->passed()){
+
+
+        try {
+
+          $add = $blogRepository->addPost($inputPost);
+
+          ?><script> window.location.replace("http://localhost:8000/blog.php") </script>;<?php
+
+        }catch(Exception $e) {
+
+          echo "Something went wrong. Try again...";
+
+        }
 
       }
-
     }
-  }
+
 ?>
+
+  <a href="http://localhost:8000/index.php">Logout</a>
+  <h3> This is your blog ! </h3>
+
   <form action="" method="post">
 
     <h3>
@@ -80,6 +65,41 @@
 
   </form>
 
+  <div class="table-main">
+    <table class="table">
+      <tbody>
+        <?php
+
+          $increment = 1;
+
+          foreach($data as $val){
+
+        ?>
+        <tr>
+          <td><p><?php echo "Post nr. " . $increment++; ?></p></td>
+        </tr>
+        <tr>
+          <td><h3><?php echo $val['title']; ?></h3></td>
+        </tr>
+        <tr>
+          <td><h4><?php echo $val['body']; ?><h4></td>
+        </tr>
+        <tr>
+          <td><h5><?php echo $val['date_created']; ?><h5></td>
+        </tr>
+        <tr>
+            <td><a href="blog-update.php?id=<?php echo $val['id']; ?>" class="edit">Edit</a></td>
+            <td><a href="blog-delete.php?id=<?php echo $val['id']; ?>" class="delete">Delete</a></td>
+        </tr>
+        <?php
+
+          }
+        ?>
+      </tbody>
+    </table>
+  </div>
+
+
 <?php
 
 
@@ -88,7 +108,8 @@
 
 ?>
 
-<p>There is your blog. Go to <a href="http://localhost:8000/login.php">login</a> for browse. If you don't have an account <a href="http://localhost:8000/register.php">register</a> now!</p>
+  <p>There is your blog. Go to <a href="http://localhost:8000/login.php">login</a> for browse. </p>
+  <p>If you don't have an account <a href="http://localhost:8000/register.php">register</a> now!</p>
 
 <?php
 

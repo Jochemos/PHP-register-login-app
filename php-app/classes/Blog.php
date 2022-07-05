@@ -12,7 +12,7 @@
       $this->_db = DB::getInstance();
     }
 
-    public function getPosts() {
+    public function getPosts(): array {
 
       $user = new Cookie();
       $data = $this->_db->getData("*", "blog", array("user_id", "=", $user->getId()));
@@ -20,7 +20,7 @@
 
     }
 
-    public function addPost($data) {
+    public function addPost($data): void {
 
       $user = new Cookie();
       $user->getId();
@@ -33,8 +33,8 @@
 
     }
 
-    public function deletePost() {
-      
+    public function deletePost($id): void {
+      $data = $this->_db->getInstance()->deleteData("blog", $id);
     }
 
 
