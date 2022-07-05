@@ -45,7 +45,7 @@
   <a href="http://localhost:8000/index.php">Logout</a>
   <h3> This is your blog ! </h3>
 
-  <form action="" method="post">
+  <form action="" method="post" class="form-main">
 
     <h3>
     <label for="post">add new post:</label>
@@ -70,13 +70,13 @@
       <tbody>
         <?php
 
-          $increment = 1;
+          $increment = count($data);
 
-          foreach($data as $val){
+          foreach(array_reverse($data) as $val){
 
         ?>
         <tr>
-          <td><p><?php echo "Post nr. " . $increment++; ?></p></td>
+          <td><p><?php echo "Post nr. " . $increment; ?></p></td>
         </tr>
         <tr>
           <td><h3><?php echo $val['title']; ?></h3></td>
@@ -88,12 +88,17 @@
           <td><h5><?php echo $val['date_created']; ?><h5></td>
         </tr>
         <tr>
-            <td><a href="blog-update.php?id=<?php echo $val['id']; ?>" class="edit">Edit</a></td>
+            <td><a href="blog-update.php?post=<?php echo $increment--; ?>&id=<?php echo $val['id']; ?>" class="edit">Edit</a></td>
             <td><a href="blog-delete.php?id=<?php echo $val['id']; ?>" class="delete">Delete</a></td>
         </tr>
         <?php
 
           }
+
+          if(count($data) === 0) {
+            echo "no data";
+          }
+
         ?>
       </tbody>
     </table>

@@ -20,7 +20,18 @@
 
     }
 
-    public function addPost($data): void {
+    public function getCurrentPost(string $idPost): array {
+
+      $data = $this->_db->getData("*", "blog", array("id", "=", $idPost));
+
+      return array(
+        "title" => $data[0]["title"],
+        "body" => $data[0]["body"]
+      );
+
+    }
+
+    public function addPost(array $data): void {
 
       $user = new Cookie();
       $user->getId();
@@ -33,10 +44,14 @@
 
     }
 
-    public function deletePost($id): void {
+    public function deletePost(string $id): void {
       $data = $this->_db->getInstance()->deleteData("blog", $id);
     }
 
+
+    public function updatePost(array $data, string $id): void {
+      $data = $this->_db->getInstance()->updateData("blog", $data, $id);
+    }
 
   }
 

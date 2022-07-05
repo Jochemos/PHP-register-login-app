@@ -20,7 +20,7 @@
 
     if($findUser){
       Cookie::new('user', $findUser, 3600);
-      Redirect::go("blog");
+      Redirect::go('blog');
     }
 
   }
