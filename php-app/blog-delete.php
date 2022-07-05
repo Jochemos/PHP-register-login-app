@@ -8,5 +8,7 @@
 
 ?>
 
-<h3> Post was deleted ! <h3>
+<h1> Post was deleted ! <h1>
 <h2> <a href="http://localhost:8000/blog.php">EXIT<a> </h2>
+
+<link rel="stylesheet" href="styles/blog-delete.css">

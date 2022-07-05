@@ -44,7 +44,7 @@
     public function passed() {
 
       if(!empty($this->_errors)){
-        echo implode("", $this->_errors);
+        echo '<p class="error">' . implode("", $this->_errors) . '</p>';
       }else{
         return true;
       }

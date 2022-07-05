@@ -42,26 +42,22 @@
 
 ?>
 
-  <a href="http://localhost:8000/index.php">Logout</a>
+  <a href="http://localhost:8000/index.php" class="logout">Logout</a>
   <h3> This is your blog ! </h3>
 
   <form action="" method="post" class="form-main">
 
     <h3>
-    <label for="post">add new post:</label>
+    <label for="post" class="description">add new post:</label>
     </h3>
 
-    <label for="title">Title</label>
-    <br>
-    <input type="text" name="title" id="title">
-    <br>
-    <br>
-    <label for="post">What's new?</label>
-    <br>
-    <textarea name="body">Enter your text</textarea>
-    <br>
-    <br>
-    <input type="submit" value="add">
+    <label for="title" class="text-title">Title</label>
+    <input type="text" name="title" class="body-title">
+
+    <label for="post" class="text-post">What's new?</label>
+    <textarea name="body" class="body-post">Enter your text</textarea>
+
+    <input type="submit" value="add" class="submit-button">
 
   </form>
 
@@ -76,20 +72,20 @@
 
         ?>
         <tr>
-          <td><p><?php echo "Post nr. " . $increment; ?></p></td>
+          <td class="post-num"><p><?php echo "Post nr. " . $increment; ?></p></td>
         </tr>
         <tr>
-          <td><h3><?php echo $val['title']; ?></h3></td>
+          <td class="post-title"><h3><?php echo $val['title']; ?></h3></td>
         </tr>
         <tr>
-          <td><h4><?php echo $val['body']; ?><h4></td>
+          <td class="post-body"><h4><?php echo $val['body']; ?><h4></td>
         </tr>
         <tr>
-          <td><h5><?php echo $val['date_created']; ?><h5></td>
+          <td class="post-date"><h5><?php echo $val['date_created']; ?><h5></td>
         </tr>
         <tr>
-            <td><a href="blog-update.php?post=<?php echo $increment--; ?>&id=<?php echo $val['id']; ?>" class="edit">Edit</a></td>
-            <td><a href="blog-delete.php?id=<?php echo $val['id']; ?>" class="delete">Delete</a></td>
+            <td class="post-update"><a href="blog-update.php?post=<?php echo $increment--; ?>&id=<?php echo $val['id']; ?>" class="edit">Edit</a></td>
+            <td class="post-delete"><a href="blog-delete.php?id=<?php echo $val['id']; ?>" class="delete">Delete</a></td>
         </tr>
         <?php
 
@@ -121,3 +117,5 @@
 }
 
 ?>
+
+<link rel="stylesheet" href="styles/blog.css">

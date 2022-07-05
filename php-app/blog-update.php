@@ -26,7 +26,7 @@
         $currentState['title'] = $_POST['title'];
         $currentState['body'] = $_POST['body'];
 
-        echo "Data update successfully !" . ' <a href="http://localhost:8000/blog.php">Back</a> to blog.'; 
+        echo '<div class="alert">Data update successfully !' . '<a href="http://localhost:8000/blog.php">Back</a></div>';
 
       }catch(Exception $e) {
 
@@ -41,22 +41,20 @@
 
 ?>
 
-<form action="" method="post">
+<form action="" method="post" class="form-main">
 
   <h3>
-  <label for="post">edit post nr <?php echo $_REQUEST['post'] ?></label>
+  <label for="post" class="description">edit post nr <?php echo $_REQUEST['post'] ?></label>
   </h3>
 
-  <label for="title">Title</label>
-  <br>
-  <input type="text" name="title" value="<?php echo $currentState["title"] ?>">
-  <br>
-  <br>
-  <label for="post">Body of your thought</label>
-  <br>
-  <textarea name="body"><?php echo $currentState["body"] ?></textarea>
-  <br>
-  <br>
-  <input type="submit" value="add">
+  <label for="title" class="text-title">Title</label>
+  <input type="text" name="title" class="body-title" value="<?php echo $currentState["title"] ?>">
+
+  <label for="post" class="text-post">Body of your thought</label>
+  <textarea name="body" class="body-post"><?php echo $currentState["body"] ?></textarea>
+
+  <input class="submit-button" type="submit" value="add">
 
 </form>
+
+<link rel="stylesheet" href="styles/blog.css">
