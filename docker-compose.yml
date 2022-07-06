@@ -22,7 +22,7 @@ services:
             MYSQL_USER: jochemos
             MYSQL_PASSWORD: Password123#@!
         ports:
-            - "9907:3306"
+            - "9908:3306"
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
