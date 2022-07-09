@@ -5,21 +5,15 @@
 
   use PHPUnit\Framework\TestCase;
 
-  class ConfigTest extends TestCase {
+  final class ConfigTest extends TestCase {
 
-      public function testGetData() {
+      public function testGetData(): void {
 
         $getUsername = Config::get('mysql/username');
         $getDBname = Config::get('mysql/db');
 
         $this->assertEquals('jochemos', $getUsername);
         $this->assertEquals('php_db', $getDBname);
-
-      }
-
-      public function testInvalidData() {
-
-        /* test */
 
       }
 

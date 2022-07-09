@@ -19,10 +19,6 @@
 
         return $config;
 
-      }else{
-
-        throw new Exception('path not found');
-        
       }
     }
   }

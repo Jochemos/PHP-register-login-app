@@ -35,10 +35,10 @@
 
     public function checkPost($data): void {
 
-      $this->getDBInstance();
       $this->_data = $data;
 
       $this->checkPostData();
+
     }
 
     public function passed() {
@@ -51,9 +51,13 @@
 
     }
 
-    private function checkRequire(): void {
+    private function checkRequire($test = null) {
 
       $data = $this->_data;
+
+      if($data === null) {
+        $data = $test;
+      }
 
       $keys = array_keys($data);
       $increment = 0;
@@ -65,16 +69,26 @@
         if(empty($data["{$position}"])){
           array_push($this->_errors, "{$position} required! <br>");
           $this->_passed = false;
+
         }
 
         $increment++;
 
       }
+
+      if($data === $test and $this->_passed === false) {
+        return $this->_errors;
+      };
+
     }
 
-    private function checkLength(): void {
+    private function checkLength($test = null) {
 
       $data = $this->_data;
+
+      if($data === null) {
+        $data = $test;
+      }
 
       $keys = array_keys($data);
       $increment = 0;
@@ -94,16 +108,22 @@
         if(strlen($dataInput) < $len[0]){
           $error = "length of {$keys[$increment]} must be greater than {$len[0]} <br>";
           array_push($this->_errors, $error);
+          $this->_passed = false;
         }
 
         if(!strlen($dataInput) > $len[1]){
           $error = "length of {$keys[$increment]} must be less than {$len[1]} <br>";
           array_push($this->_errors, $error);
+          $this->_passed = false;
         }
 
         $increment++;
 
       }
+
+      if($data === $test and $this->_passed === false) {
+        return $this->_errors;
+      };
 
     }
 
