@@ -55,9 +55,7 @@
 
       $data = $this->_data;
 
-      if($data === null) {
-        $data = $test;
-      }
+      $data = null ?? $data = $test;
 
       $keys = array_keys($data);
       $increment = 0;
@@ -76,7 +74,7 @@
 
       }
 
-      if($data === $test and $this->_passed === false) {
+      if($data === $test) {
         return $this->_errors;
       };
 
@@ -86,9 +84,7 @@
 
       $data = $this->_data;
 
-      if($data === null) {
-        $data = $test;
-      }
+      $data = null ?? $data = $test;
 
       $keys = array_keys($data);
       $increment = 0;
@@ -111,7 +107,7 @@
           $this->_passed = false;
         }
 
-        if(!strlen($dataInput) > $len[1]){
+        if(strlen($dataInput) > $len[1]){
           $error = "length of {$keys[$increment]} must be less than {$len[1]} <br>";
           array_push($this->_errors, $error);
           $this->_passed = false;
@@ -121,7 +117,7 @@
 
       }
 
-      if($data === $test and $this->_passed === false) {
+      if($data === $test) {
         return $this->_errors;
       };
 
@@ -141,15 +137,21 @@
       }
     }
 
-    private function checkPassword(): void {
+    private function checkPassword($test = null) {
 
       $data = $this->_data;
+
+      $data = null ?? $data = $test;
 
       if($data["password"] !== $data["password_again"]){
         $this->_passed = false;
         array_push($this->_errors, "Password must be equal <br>");
       }else{
         $this->_passed = true;
+      }
+
+      if($data === $test){
+        return $this->_errors;
       }
 
     }
@@ -175,9 +177,11 @@
 
     }
 
-    private function checkPostData(): void {
+    private function checkPostData($test = null) {
 
       $data = $this->_data;
+
+      $data = null ?? $data = $test;
 
       foreach($data as $key => $value) {
 
@@ -198,8 +202,11 @@
 
       }
 
-    }
+      if($data === $test){
+        return $this->_errors;
+      }
 
+    }
 
   }
 

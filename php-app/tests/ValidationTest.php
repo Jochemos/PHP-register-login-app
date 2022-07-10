@@ -54,19 +54,87 @@
 
     public function testLengthOfValues() {
 
-      $data = array(
-        0 => 'length of username must be greatest than 4 <br>',
-        1 => 'length of password must be greatest than 5 <br>',
-        2 => 'length of password_again must be greatest than 5 <br>',
-        3 => 'length of name must be greateatest than 2 <br>'
+      $notEnoughData = array(
+        "username" => '',
+        "password" => '',
+        "password_again" => '',
+        "name" => ''
+      );
+
+      $longerData = array(
+        "username" => 'thisIsValueWithLongDataOfUsername',
+        "password" => 'thisIsValueWithLongerDataOfPassword',
+        "password_again" => 'thisIsValueWithLongerDataOfPassword',
+        "name" => 'thisIsValueWithLongerDataOfName'
+      );
+
+      $resultWithLessData = getInstanceReflect::getResultBy('checkLength', $notEnoughData);
+      $resultWithGreaterData = getInstanceReflect::getResultBy('checkLength', $longerData);
+
+      $expect_first = array(
+        0 => 'length of username must be greater than 4 <br>',
+        1 => 'length of password must be greater than 5 <br>',
+        2 => 'length of password_again must be greater than 5 <br>',
+        3 => 'length of name must be greater than 2 <br>'
+      );
+
+      $expect_second = array(
+        0 => 'length of username must be less than 15 <br>',
+        1 => 'length of password must be less than 30 <br>',
+        2 => 'length of password_again must be less than 30 <br>',
+        3 => 'length of name must be less than 30 <br>'
 
       );
 
-      $result = getInstanceReflect::getResultBy('checkLength', $data);
+      $this->assertEquals($expect_first, $resultWithLessData);
+      $this->assertEquals($expect_second, $resultWithGreaterData);
 
-      $expect = array();
+    }
+
+    public function testCheckPassword() {
+
+      $data = array(
+        "username" => '',
+        "password" => 'firstSetPassword',
+        "password_again" => 'secondSetPassword',
+        "name" => ''
+      );
+
+      $result = getInstanceReflect::getResultBy('checkPassword', $data);
+
+      $expect = array(
+        0 => 'Password must be equal <br>'
+      );
 
       $this->assertEquals($expect, $result);
+
+    }
+
+    public function testCheckPost() {
+
+      $notEnoughData = array(
+        "title" => "",
+        "body" => ""
+      );
+
+      $longerData = array(
+        "title" => "thisIsLongerDataThenExpectOfTitle",
+      );
+
+      $resultWithLessData = getInstanceReflect::getResultBy('checkPostData', $notEnoughData);
+      $resultWithGreaterData = getInstanceReflect::getResultBy('checkPostData', $longerData);
+
+      $expect_first = array(
+        0 => 'title is required ! <br>',
+        1 => 'body is required ! <br>'
+      );
+
+      $expect_second = array(
+        0 => 'title must be less than 30 ! <br>'
+      );
+
+      $this->assertEquals($expect_first, $resultWithLessData);
+      $this->assertEquals($expect_second, $resultWithGreaterData);
 
     }
 
