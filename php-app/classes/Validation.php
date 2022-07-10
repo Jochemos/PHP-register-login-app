@@ -55,7 +55,9 @@
 
       $data = $this->_data;
 
-      $data = null ?? $data = $test;
+      if($test !== null) {
+        $data = $test;
+      }
 
       $keys = array_keys($data);
       $increment = 0;
@@ -84,7 +86,9 @@
 
       $data = $this->_data;
 
-      $data = null ?? $data = $test;
+      if($test !== null) {
+        $data = $test;
+      }
 
       $keys = array_keys($data);
       $increment = 0;
@@ -141,7 +145,9 @@
 
       $data = $this->_data;
 
-      $data = null ?? $data = $test;
+      if($test !== null) {
+        $data = $test;
+      }
 
       if($data["password"] !== $data["password_again"]){
         $this->_passed = false;
@@ -181,7 +187,9 @@
 
       $data = $this->_data;
 
-      $data = null ?? $data = $test;
+      if($test !== null) {
+        $data = $test;
+      }
 
       foreach($data as $key => $value) {
 

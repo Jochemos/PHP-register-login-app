@@ -30,7 +30,7 @@
   final class ValidationTest extends TestCase {
 
 
-    public function testRequireValues() {
+    public function testRequireValues(): void {
 
       $data = array(
         "username" => '',
@@ -52,7 +52,7 @@
 
     }
 
-    public function testLengthOfValues() {
+    public function testLengthOfValues(): void {
 
       $notEnoughData = array(
         "username" => '',
@@ -91,7 +91,7 @@
 
     }
 
-    public function testCheckPassword() {
+    public function testCheckPassword(): void {
 
       $data = array(
         "username" => '',
@@ -110,7 +110,7 @@
 
     }
 
-    public function testCheckPost() {
+    public function testCheckPost(): void {
 
       $notEnoughData = array(
         "title" => "",
