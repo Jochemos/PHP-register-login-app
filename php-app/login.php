@@ -33,6 +33,9 @@
 
 
 <form action="" method="post">
+
+  <h1> Login page </h1>
+
   <div class="field">
     <label for="username">Username</label>
     <input type="text" name="username" id="username" value="" autocomplete="off">
@@ -43,5 +46,7 @@
     <input type="password" name="password" id="password">
   </div>
 
-  <input type="submit" value="Login">
+  <input class="button" type="submit" value="Login">
 </form>
+
+<link rel="stylesheet" href="styles/user-panel.css">

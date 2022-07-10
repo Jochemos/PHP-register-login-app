@@ -44,7 +44,7 @@
 <form action="" method="post" class="form-main">
 
   <h3>
-  <label for="post" class="description">edit post nr <?php echo $_REQUEST['post'] ?></label>
+  <label for="post" class="description">editing post nr <?php echo $_REQUEST['post'] ?> during...</label>
   </h3>
 
   <label for="title" class="text-title">Title</label>

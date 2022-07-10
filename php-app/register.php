@@ -47,6 +47,9 @@
 ?>
 
 <form action="" method="post">
+
+  <h1> Register page </h1>
+
   <div class="field">
     <label for="username">Username</label>
     <input type="text" name="username" id="username" value="" autocomplete="off">
@@ -67,5 +70,7 @@
     <input type="text" name="name" id="name">
   </div>
 
-  <input type="submit" value="Register">
+  <input class="button" type="submit" value="Register">
 </form>
+
+<link rel="stylesheet" href="styles/user-panel.css">

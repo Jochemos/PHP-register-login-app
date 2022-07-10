@@ -38,14 +38,14 @@
         if($valid_pwd->passed() === true){
 
           $userData = $this->_db->getData("id", "users", array("username", "=", "'{$data["username"]}'"));
-          
+
           return $userData[0][0];
 
         }
 
       }else{
 
-        echo "User not exist !";
+        echo '<p class="error">User already exist !</p>';
 
       }
 

@@ -1,0 +1,40 @@
+html {
+  background: #FFFFFF;
+}
+
+.main-all {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 21%;
+  margin-left: 20%;
+  padding: 5px;
+  width: 50%;
+  background: #474A8A;
+  color: white;
+  font-size: calc(0.7rem + 0.7vh);
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
+
+.main-all .elephant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #B0B3D6;
+  position: absolute;
+  left: 50%;
+  bottom: 70%;
+  font-size: calc(0.73rem + 0.75vh);
+  color: black;
+  border-radius: 3px 3px 0px 0px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
+}
+
+.main-all .redirecting a {
+  color: #d1d1e0;
+  text-decoration: none;
+  font-weight: 900;
+}

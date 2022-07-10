@@ -43,13 +43,13 @@
 ?>
 
   <a href="http://localhost:8000/index.php" class="logout">Logout</a>
-  <h3> This is your blog ! </h3>
+  <h3> Welcome again in your blog ! </h3>
 
   <form action="" method="post" class="form-main">
 
-    <h3>
-    <label for="post" class="description">add new post:</label>
-    </h3>
+    <h4>
+    <label for="post" class="description">Do you want add new post? Here you go:</label>
+    </h4>
 
     <label for="title" class="text-title">Title</label>
     <input type="text" name="title" class="body-title">
