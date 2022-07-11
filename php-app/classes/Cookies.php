@@ -4,9 +4,14 @@
 
     public $_userId = null;
 
-    public static function new(string $cookie_name, string $identify, int $expire): void {
+    public static function new(string $cookie_name, string $identify, int $expire, bool $test = null) {
       $prefix = '%' . $identify . '%s\r\n';
       $unique = uniqid($prefix, true);
+
+      if(isset($test)){
+        return $unique;
+      }
+
       setcookie($cookie_name, $unique, time() + $expire);
     }
 

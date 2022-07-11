@@ -19,7 +19,7 @@
     $findUser = $users->findUser($user_input);
 
     if($findUser){
-      Cookie::new('user', $findUser, 3600);
+      Cookie::new('user', $findUser, 60*60*24);
       Redirect::go('blog');
     }
 
