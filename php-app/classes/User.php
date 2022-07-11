@@ -45,7 +45,7 @@
 
       }else{
 
-        echo '<p class="error">User already exist !</p>';
+        echo '<p class="error">User not exist !</p>';
 
       }
 
