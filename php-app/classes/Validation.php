@@ -55,7 +55,7 @@
 
       $data = $this->_data;
 
-      if($test !== null) {
+      if(isset($test)) {
         $data = $test;
       }
 
@@ -86,7 +86,7 @@
 
       $data = $this->_data;
 
-      if($test !== null) {
+      if(isset($test)) {
         $data = $test;
       }
 
@@ -145,7 +145,7 @@
 
       $data = $this->_data;
 
-      if($test !== null) {
+      if(isset($test)) {
         $data = $test;
       }
 
@@ -187,7 +187,7 @@
 
       $data = $this->_data;
 
-      if($test !== null) {
+      if(isset($test)) {
         $data = $test;
       }
 

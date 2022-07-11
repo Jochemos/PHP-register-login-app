@@ -8,28 +8,44 @@
     private static $_instance = null;
     private $_pdo;
     private $_result;
+    private static $_test = null;
 
     private function __construct() {
+
       try {
         $this->_pdo = new PDO('mysql:host=' . Config::get('mysql/host') . ';dbname=' . Config::get('mysql/db'), Config::get('mysql/username'), Config::get('mysql/password'));
       } catch(PDOException $e) {
+        if(isset(self::$_test)){
+          return true;
+        }else{
           die($e->getMessage());
+        }
       }
     }
 
-    public static function getInstance() {
+    public static function getInstance(string $test = null) {
+
+      if(isset($test)){
+        self::$_test = true;
+      }
+
       if(!isset(self::$_instance)){
         self::$_instance = new DB();
       }
+
       return self::$_instance;
     }
 
-    public function getData(string $column, string $table, array $detail = null): array {
+    public function getData(string $column, string $table, array $detail = null, bool $test = null): array|string {
       $sql = "SELECT {$column} FROM {$table}";
 
-      if($detail != null){
+      if(isset($detail)){
         $detail = implode(" ", $detail);
         $sql = $sql . " WHERE " . $detail;
+
+        if(isset($test)){
+          return $sql;
+        }
       }
 
       $giveOrder = $this->_pdo->prepare($sql);
@@ -47,7 +63,7 @@
       $giveOrder->execute([$id]);
     }
 
-    public function addData(string $table, array $data): bool{
+    public function addData(string $table, array $data, bool $test = null): bool|string {
 
       $indexKeys = implode(', ', array_keys($data));
 
@@ -65,6 +81,10 @@
       $amountValues = implode(", ", $amountValues);
 
       $sql = "INSERT INTO {$table}(" . "{$indexKeys}" . ") VALUES (" . "{$amountValues}" . ")";
+
+      if(isset($test)){
+        return $sql;
+      }
 
       if($giveOrder = $this->_pdo->prepare($sql)){
         $increment = 0;
@@ -86,7 +106,7 @@
       }
     }
 
-    public function updateData(string $table, array $newData, string $id): bool {
+    public function updateData(string $table, array $newData, string $id, bool $test = null): bool|string {
 
       $dataKeys = array_keys($newData);
 
@@ -99,6 +119,10 @@
       $queryData = implode(', ', $queryData);
 
       $sql = "UPDATE {$table} SET {$queryData} WHERE id = {$id}";
+
+      if(isset($test)) {
+        return $sql;
+      }
 
       if($giveOrder = $this->_pdo->prepare($sql)) {
 
